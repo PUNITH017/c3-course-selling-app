@@ -5,8 +5,8 @@ const app = express();
 
 app.use(express.json())
 
-app.use("/user", userRouter)
-app.use("/course", courseRouter)
+app.use("/api/v7/user", userRouter)
+app.use("/api/v7/course", courseRouter)
 
 
 

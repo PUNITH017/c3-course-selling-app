@@ -1,14 +1,14 @@
 const {Router} = require("express")
 
 const courseRouter = Router();
-    courseRouter.post("/course/buy-course", function(req, res){
+    courseRouter.post("/buy-course", function(req, res){
         res.json({
             message: "NEW COURSES TO BUY"
         })
     })
     
     // AVAILABLE COURSE TO BUY 
-    courseRouter.get("/course/preview", function(req, res){
+    courseRouter.get("/preview", function(req, res){
         res.json({
             message: "TOTAL COURSE"
         })
