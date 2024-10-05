@@ -14,8 +14,8 @@ app.use("/api/v7/course", courseRouter)
 app.use("/api/v7/admin", adminRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
-.then(()=> console.log("MONGODB CONNECTED SUCCESSFULLY"))
-.catch(err=> console.log('MongoDB connection error:', err))
+    .then(()=> console.log("MONGODB CONNECTED SUCCESSFULLY"))
+    .catch(err=> console.log('MongoDB connection error:', err))
 
 
 
