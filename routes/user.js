@@ -4,12 +4,13 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const {z} = require("zod")
 require('dotenv').config()
+const userMiddleWare = require("../Middleware/user")
 
-const JWT_SECRET = process.env.JWT_USER_PASSWORD;
+const JWT_USER_PASSWORD = process.env.JWT_USER_PASSWORD;
 
 const userRouter = Router();
 
-    userRouter.post("/signup", async function(req, res){
+userRouter.post("/signup", async function(req, res){
 
         try{
             const signUp_Schema = z.object({
@@ -50,9 +51,9 @@ const userRouter = Router();
         res.json({
             message: "SIGN-UP IS SUCCESSFULL"
         })
-    })
+})
     
-    userRouter.post("/signin", async function(req, res){
+userRouter.post("/signin", async function(req, res){
         
        try{
         const signIn_Schema = z.object({
@@ -83,7 +84,7 @@ const userRouter = Router();
             if(user && passMatch){
                 const token = jwt.sign({
                     id: user._id.toString()
-                }, JWT_SECRET)
+                }, JWT_USER_PASSWORD)
 
                 return res.json({
                     message: "YOUR TOKEN IS GENERATED",
@@ -101,15 +102,14 @@ const userRouter = Router();
             })
        }
         
-    })
-    
-    // USERS ALREADY PURCHASED COURSES -U
-    userRouter.get("/my-purchases", function(req, res){
-        res.json({
-            message: "USERS PURCHASE LIST"
-        })
-    })
+})
 
+    // USERS ALREADY PURCHASED COURSES -U
+userRouter.get("/my-purchases",userMiddleWare , async function(req, res){
+    res.json({
+        message: "USERS PURCHASE LIST"
+    })
+})
 
 
 module.exports = {
