@@ -19,5 +19,5 @@ just a practice project
 *   Add middlewares for user and admin auth
 
 *   Complete the routes for user login, signup, purchase a course, see course (Extra points - Use express routing to better structure your routes)
-
+.......................above things are done................................
 *   Create the frontend
