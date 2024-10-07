@@ -1,21 +1,32 @@
 const {Router} = require("express")
 const {userMiddleWare} = require("../Middleware/user")
+const { purchaseModel, courseModel } = require("../DataBase/db")
+
 const courseRouter = Router();
 
 
 
-// user can buy th enewly available courses
+// user can buy the enewly available courses
 courseRouter.post("/buy-course", userMiddleWare, async function(req, res){
     const userId = req.userId;
-        res.json({
-            message: "NEW COURSES TO BUY"
-        })
+    const courseId = req.body.courseId;
+
+    const purchasedCourse = await purchaseModel.create({
+        userId:userId,
+        courseId:courseId
+    })
+    res.json({
+        message: "YOU HAVE SUCCESSFULLY BROUGHT THE COURSE",
+        YourCourse: purchasedCourse
+    })
 })
     
     // AVAILABLE COURSE TO BUY 
-    courseRouter.get("/preview", function(req, res){
+    courseRouter.get("/preview", async function(req, res){
+        
+        const courses = await courseModel.find({})
         res.json({
-            message: "TOTAL COURSE"
+            courses
         })
     })
     

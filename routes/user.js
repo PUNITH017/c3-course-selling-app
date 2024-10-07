@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const {userModel} = require("../DataBase/db")
+const {userModel, purchaseModel} = require("../DataBase/db")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const {z} = require("zod")
@@ -106,8 +106,13 @@ userRouter.post("/signin", async function(req, res){
 
     // USERS ALREADY PURCHASED COURSES -U
 userRouter.get("/my-purchases",userMiddleWare , async function(req, res){
+    const userId = req.userId;
+
+    const purchases = await purchaseModel.find({
+        userId
+    })
     res.json({
-        message: "USERS PURCHASE LIST"
+        purchases
     })
 })
 
